@@ -75,15 +75,6 @@
 			margin: 0;
 			width: 100%;
 		}
-
-		.error-log {
-			margin-top: 0;
-			color: red;
-		}
-
-		.error-log:empty {
-			margin: 0;
-		}
 	</style>
 </head>
 
@@ -189,7 +180,6 @@
 					</select>
 				</div>
 			</div>
-			<pre id="errorlog_skin" class="error-log"></pre>
 			<div>
 				<div class="control">
 					<label for="cape_url">Cape URL:</label>
@@ -205,7 +195,6 @@
 						onclick="document.getElementById('cape_url_upload').click();">Browse...</button>
 				</div>
 			</div>
-			<pre id="errorlog_cape" class="error-log"></pre>
 		</div>
 
 	</div>
@@ -225,32 +214,32 @@
 		let primaryAnimation;
 
 		function reloadSkin() {
-			const url = document.getElementById("skin_url").value;
-			const errlog = document.getElementById("errorlog_skin");
+			const input = document.getElementById("skin_url");
+			const url = input.value;
 			if (url === "") {
 				skinViewer.loadSkin(null);
-				errlog.innerText = "";
+				input.setCustomValidity("");
 			} else {
 				skinViewer.loadSkin(url, document.getElementById("skin_model").value)
-					.then(() => errlog.innerText = "")
+					.then(() => input.setCustomValidity(""))
 					.catch(e => {
-						errlog.innerText = e.message;
+						input.setCustomValidity("Image can't be loaded.");
 						console.error(e);
 					});
 			}
 		}
 
 		function reloadCape() {
-			const url = document.getElementById("cape_url").value;
-			const errlog = document.getElementById("errorlog_cape");
+			const input = document.getElementById("cape_url");
+			const url = input.value;
 			if (url === "") {
 				skinViewer.loadCape(null);
-				errlog.innerText = "";
+				input.setCustomValidity("");
 			} else {
 				skinViewer.loadCape(url)
-					.then(() => errlog.innerText = "")
+					.then(() => input.setCustomValidity(""))
 					.catch(e => {
-						errlog.innerText = e.message;
+						input.setCustomValidity("Image can't be loaded.");
 						console.error(e);
 					});
 			}
