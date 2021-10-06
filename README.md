@@ -8,6 +8,7 @@ skinview3d
 
 Three.js powered Minecraft skin viewer.
 
+**********************************************
 # Features
 * 1.8 Skins
 * HD Skins
